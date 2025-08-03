@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Portal Login</title>
+  <small>dm Alex for username</small>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      text-align: center;
+      padding: 50px;
+      color: white;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Discord Portal</h1>
+  <p>Select your assigned username to enter:</p>
+
+  <select id="username">
+    <option value="">-- Select Username --</option>
+    <option value="Alex">Alex</option>
+    <option value="pti5981">pti5981</option>
+    <option value="h_h16">h_h16</option>
+    <option value="luna">luna</option>
+  </select>
+  <br>
+  <button onclick="enterPortal()">Enter Portal</button>
+
+  <script>
+    function enterPortal() {
+      const user = document.getElementById("username").value;
+      if (user) {
+        // Redirect to portal with username in the URL
+        window.location.href = "portal.html?user=" + encodeURIComponent(user);
+      } else {
+        alert("Please select a username!");
+      }
+    }
+  </script>
+</body>
+</html>
