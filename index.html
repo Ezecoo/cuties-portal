@@ -4,52 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discord Portal Login</title>
-  <small>dm Alex for username</small>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #d7b89c, #a47148); /* Coffee tones */
       text-align: center;
       padding: 50px;
-      color: white;
+      color: #4b2e2e;
     }
+
+    .container {
+      background: rgba(255, 248, 240, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      max-width: 400px;
+    }
+
+    h1 {
+      font-family: 'Brush Script MT', cursive;
+      color: #5b3a29;
+      font-size: 2.5rem;
+    }
+
+    small {
+      display: block;
+      margin-bottom: 15px;
+      color: #8b5e3c;
+    }
+
     select, button {
       padding: 10px;
       margin: 10px;
-      border-radius: 5px;
-      border: none;
+      border-radius: 8px;
+      border: 2px solid #8b5e3c;
       font-size: 16px;
+      background-color: #fff6ee;
+      color: #4b2e2e;
     }
+
+    select:focus, button:hover {
+      background-color: #f5e1d0;
+    }
+
     button {
-      background-color: #007bff;
+      background-color: #a47148;
       color: white;
+      border: none;
       cursor: pointer;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background-color: #8b5e3c;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to the Discord Portal</h1>
-  <p>Select your assigned username to enter:</p>
+  <div class="container">
+    <h1>☕ Cozy Café Login</h1>
+    <small>DM Alex for your username</small>
+    <p>Select your assigned username to enter:</p>
 
-  <select id="username">
-    <option value="">-- Select Username --</option>
-    <option value="Alex">Alex</option>
-    <option value="pti5981">pti5981</option>
-    <option value="h_h16">h_h16</option>
-    <option value="luna">luna</option>
-    <option value="Zoe">Zoe</option>
-  </select>
-  <br>
-  <button onclick="enterPortal()">Enter Portal</button>
+    <select id="username">
+      <option value="">-- Select Username --</option>
+      <option value="Alex">Alex</option>
+      <option value="pti5981">pti5981</option>
+      <option value="h_h16">h_h16</option>
+      <option value="luna">luna</option>
+      <option value="Zoe">Zoe</option>
+    </select>
+    <br>
+    <button onclick="enterPortal()">Enter Portal</button>
+  </div>
 
   <script>
     function enterPortal() {
       const user = document.getElementById("username").value;
       if (user) {
-        // Redirect to portal with username in the URL
         window.location.href = "portal.html?user=" + encodeURIComponent(user);
       } else {
         alert("Please select a username!");
