@@ -6,79 +6,116 @@
   <title>Discord Portal</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #43cea2, #185a9d);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #d7b89c, #a47148); /* Coffee tones */
       text-align: center;
       padding: 50px;
-      color: white;
+      color: #4b2e2e;
     }
+
+    .container {
+      background: rgba(255, 248, 240, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      max-width: 600px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Brush Script MT', cursive;
+      color: #5b3a29;
+    }
+
+    small {
+      display: block;
+      margin-bottom: 5px;
+      color: #8b5e3c;
+    }
+
     button {
       padding: 12px 20px;
       margin: 10px;
-      border-radius: 6px;
+      border-radius: 8px;
       border: none;
       font-size: 16px;
-      background-color: #007bff;
+      background-color: #a47148;
       color: white;
       cursor: pointer;
+      transition: 0.3s;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background-color: #8b5e3c;
+      transform: scale(1.05);
     }
-    .hidden { display: none; }
+
     input, textarea {
       padding: 10px;
       margin: 10px;
-      border-radius: 5px;
-      border: none;
+      border-radius: 8px;
+      border: 2px solid #8b5e3c;
       width: 80%;
       max-width: 300px;
+    }
+
+    .hidden { display: none; }
+
+    a {
+      color: #4b2e2e;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #8b5e3c;
     }
   </style>
 </head>
 <body>
-  <h1>Portal</h1>
-  <p id="welcome"></p>
+  <div class="container">
+    <h1>☕ Cozy Portal</h1>
+    <p id="welcome"></p>
 
-  <!-- categories -->
-  <h3>categories</h3>
-  <button onclick="window.location.href='info.html'">information page</button>
-  
-  <!-- Action Buttons -->
-  <h2>roles</h2>
-  <button onclick="showForm('add role')">add role</button>
-  <button onclick="showForm('Suggest Role')">Suggest Role</button>
-  <button onclick="showForm('remove role')">remove role</button>
+    <!-- Categories -->
+    <h3>Categories</h3>
+    <button onclick="window.location.href='info.html'">Information Page</button>
 
-  <!-- Emojis -->
-  <h2>emojis</h2>
-  <small>when making an emoji</small>
-  <small>please enter the URL</small>
-  <button onclick="showForm('suggest emoji')">suggest emoji</button>
+    <!-- Roles -->
+    <h2>Roles</h2>
+    <button onclick="showForm('Add Role')">Add Role</button>
+    <button onclick="showForm('Suggest Role')">Suggest Role</button>
+    <button onclick="showForm('Remove Role')">Remove Role</button>
 
-  <!-- punnish -->
-  <h2>punnishment</h2>
-  <button onclick="showForm('request timeout')">request user timeout</button>
+    <!-- Emojis -->
+    <h2>Emojis</h2>
+    <small>When making an emoji</small>
+    <small>Please enter the URL</small>
+    <button onclick="showForm('Suggest Emoji')">Suggest Emoji</button>
 
-  <!-- partners -->
-  <h2>partnerships</h2>
-  <a href="https://discord.gg/jmcnu8t3" 
-  target="_blank">dandys world show!!!</a>
-  
-  <!-- appointment -->
-  <h2>appointment</h2>
-  <p>please put return email and discord username in this order email, discord user</p>
-  <button onclick="showForm('appointment')">appointment</button>
+    <!-- Punishment -->
+    <h2>Punishment</h2>
+    <button onclick="showForm('Request Timeout')">Request User Timeout</button>
 
-  <!-- Form (hidden by default) -->
-  <form id="requestForm" class="hidden" action="https://formsubmit.co/ezekielbuyloses@gmail.com" method="POST">
-    <input type="hidden" id="hiddenUser" name="username">
-    <input type="hidden" id="hiddenAction" name="action">
-    <p id="formTitle"></p>
-    <input type="text" name="details" placeholder="Enter details (e.g. Tester Role)" required>
-    <br>
-    <button type="submit">Send Request</button>
-  </form>
+    <!-- Partnerships -->
+    <h2>Partnerships</h2>
+    <a href="https://discord.gg/jmcnu8t3" target="_blank">Dandy's World Show!!!</a>
+
+    <!-- Appointment -->
+    <h2>Appointment</h2>
+    <p>Please put return email and Discord username in this order: email, Discord user</p>
+    <button onclick="showForm('Appointment')">Appointment</button>
+
+    <!-- Form -->
+    <form id="requestForm" class="hidden" action="https://formsubmit.co/ezekielbuyloses@gmail.com" method="POST">
+      <input type="hidden" id="hiddenUser" name="username">
+      <input type="hidden" id="hiddenAction" name="action">
+      <p id="formTitle"></p>
+      <input type="text" name="details" placeholder="Enter details (e.g. Tester Role)" required><br>
+      <button type="submit">Send Request</button>
+    </form>
+  </div>
 
   <script>
     // Get username from URL
@@ -94,4 +131,4 @@
     }
   </script>
 </body>
-</html>
+      </html>
