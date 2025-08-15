@@ -1,92 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discord Portal Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozy Café Login</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #d7b89c, #a47148); /* Coffee tones */
-      text-align: center;
-      padding: 50px;
-      color: #4b2e2e;
+      background: linear-gradient(to bottom, #f9e0bb, #f6d6ad);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-
-    .container {
-      background: rgba(255, 248, 240, 0.95);
-      padding: 30px;
+    .login-card {
+      background: #fff8f0;
+      padding: 2rem;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      display: inline-block;
-      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 300px;
     }
-
     h1 {
-      font-family: 'Brush Script MT', cursive;
-      color: #5b3a29;
-      font-size: 2.5rem;
+      color: #6b4226;
+      font-size: 1.8rem;
     }
-
-    small {
-      display: block;
-      margin-bottom: 15px;
-      color: #8b5e3c;
+    p {
+      color: #8a5b39;
     }
-
-    select, button {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 8px;
-      border: 2px solid #8b5e3c;
-      font-size: 16px;
-      background-color: #fff6ee;
-      color: #4b2e2e;
-    }
-
-    select:focus, button:hover {
-      background-color: #f5e1d0;
-    }
-
     button {
-      background-color: #a47148;
+      background-color: #d4a373;
       color: white;
       border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
     }
-
     button:hover {
-      background-color: #8b5e3c;
+      background-color: #b5835a;
+    }
+    img.logo {
+      width: 70px;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>☕ Cozy Café Login</h1>
-    <small>DM Alex for your username</small>
-    <p>Select your assigned username to enter:</p>
-
-    <select id="username">
-      <option value="">-- Select Username --</option>
-      <option value="Alex">Alex</option>
-      <option value="pti5981">pti5981</option>
-      <option value="h_h16">h_h16</option>
-      <option value="luna">luna</option>
-      <option value="Zoe">Zoe</option>
-    </select>
-    <br>
-    <button onclick="enterPortal()">Enter Portal</button>
+  <div class="login-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/320px-A_small_cup_of_coffee.JPG" alt="Cafe Logo" class="logo">
+    <h1>Welcome to Cozy Café</h1>
+    <p>Login with your Google account to continue</p>
+    <button id="googleLogin">☕ Sign in with Google</button>
   </div>
 
-  <script>
-    function enterPortal() {
-      const user = document.getElementById("username").value;
-      if (user) {
-        window.location.href = "portal.html?user=" + encodeURIComponent(user);
-      } else {
-        alert("Please select a username!");
-      }
-    }
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // Import Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAM_tlHKwg6cZFnCyCCr2IGGnZRJ1tt4l4",
+      authDomain: "cuties-portal.firebaseapp.com",
+      projectId: "cuties-portal",
+      storageBucket: "cuties-portal.firebasestorage.app",
+      messagingSenderId: "475783224631",
+      appId: "1:475783224631:web:6f1b42fc69b1b2133e8eb2"
+    };
+
+    // Init Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Login button
+    document.getElementById("googleLogin").addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          alert(`Welcome, ${user.displayName}!`);
+          // You can redirect to your portal page here
+          // window.location.href = "/portal.html";
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Login failed.");
+        });
+    });
   </script>
 </body>
 </html>
