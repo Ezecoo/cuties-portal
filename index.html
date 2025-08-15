@@ -1,75 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cozy Café Login</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cozy Café Login</title>
+<style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #f9e0bb, #f6d6ad);
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .login-card {
-      background: #fff8f0;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 300px;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #c79a6d, #6f4e37);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
     }
     h1 {
-      color: #6b4226;
-      font-size: 1.8rem;
+        margin-bottom: 10px;
     }
     p {
-      color: #8a5b39;
+        margin-bottom: 30px;
+        font-size: 1.2em;
     }
     button {
-      background-color: #d4a373;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
+        background: #fff;
+        color: #333;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        font-size: 1em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        transition: transform 0.2s ease;
     }
     button:hover {
-      background-color: #b5835a;
+        transform: scale(1.05);
     }
-    img.logo {
-      width: 70px;
-      margin-bottom: 1rem;
+    button img {
+        width: 20px;
     }
-  </style>
+</style>
 </head>
 <body>
-  <div class="login-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/320px-A_small_cup_of_coffee.JPG" alt="Cafe Logo" class="logo">
-    <h1>Welcome to Cozy Café</h1>
-    <p>Login with your Google account to continue</p>
-    <button id="googleLogin">☕ Sign in with Google</button>
-  </div>
 
-  <!-- Firebase SDKs -->
-  <script type="module">
-    // Import Firebase SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+<h1>☕ Welcome to Cozy Café</h1>
+<p>Sign in to get your favorite brews!</p>
+<button id="googleLogin">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Google_%22G%22_Logo.svg">
+    Sign in with Google
+</button>
 
-    // Your Firebase config
+<script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } 
+        from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    // Your Firebase config (replace with your project values)
     const firebaseConfig = {
-      apiKey: "AIzaSyAM_tlHKwg6cZFnCyCCr2IGGnZRJ1tt4l4",
-      authDomain: "cuties-portal.firebaseapp.com",
-      projectId: "cuties-portal",
-      storageBucket: "cuties-portal.firebasestorage.app",
-      messagingSenderId: "475783224631",
-      appId: "1:475783224631:web:6f1b42fc69b1b2133e8eb2"
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
     };
 
     // Init Firebase
@@ -77,20 +75,25 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    // Login button
-    document.getElementById("googleLogin").addEventListener("click", () => {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const user = result.user;
-          alert(`Welcome, ${user.displayName}!`);
-          // You can redirect to your portal page here
-          // window.location.href = "/portal.html";
-        })
-        .catch((error) => {
-          console.error(error);
-          alert("Login failed.");
-        });
+    // If already signed in, redirect
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            window.location.href = "home.html"; // go to your home/dashboard
+        }
     });
-  </script>
+
+    // Button click handler
+    document.getElementById("googleLogin").addEventListener("click", () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                console.log("Signed in:", result.user);
+                window.location.href = "home.html"; // after login
+            })
+            .catch((error) => {
+                console.error("Error signing in:", error);
+            });
+    });
+</script>
+
 </body>
 </html>
